@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEALS KARENGE - Buy & Sell YouTube Channels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #FF0000;
+            --primary-dark: #CC0000;
+            --secondary: #282828;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --success: #28a745;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fefefe;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            color: var(--primary);
+            font-size: 28px;
+        }
+        
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 24px;
+            color: var(--dark);
+            letter-spacing: 1px;
+        }
+        
+        .logo-text span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+            animation: heroFadeIn 1s ease-out;
+        }
+
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.05);
+            top: -150px;
+            right: -150px;
+        }
+        
+        .hero:after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.05);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .hero-text {
+            flex: 1;
+            z-index: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            z-index: 1;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: var(--transition);
+        }
+        
+        .hero-image img:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .hero h1 span {
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .highlight-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+        
+        /* Video Section */
+        .video-section {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+            animation: fadeInScale 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .video-section video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: block;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+        }
+
+        .video-section video:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .video-section video {
+                max-width: 90%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-section video {
+                max-width: 95%;
+            }
+        }
+
+        /* Video Demo Section */
+        .video-demo {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(45deg, #0f0f0f, #282828);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .video-placeholder i {
+            font-size: 80px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .video-placeholder h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .video-placeholder p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        /* Buy/Sell Options */
+        .options {
+            padding: 100px 0;
+            background-color: white;
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .option-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            animation: slideInUpCard 1s ease-out both;
+        }
+
+        .option-card:nth-child(1) {
+            animation-delay: 0.4s;
+        }
+
+        .option-card:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes slideInUpCard {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .option-header {
+            padding: 30px 30px 20px;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .option-header i {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .option-header h3 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .option-body {
+            padding: 30px;
+        }
+        
+        .option-body ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .option-body li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .option-body li:last-child {
+            border-bottom: none;
+        }
+        
+        .option-body li i {
+            color: var(--success);
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1a1a1a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Information Sections */
+        .info-sections {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+            animation: slideInRight 1s ease-out 0.6s both;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .info-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tab-btn {
+            padding: 12px 30px;
+            background: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            animation: slideInUpTab 1s ease-out both;
+        }
+
+        .tab-btn:nth-child(1) {
+            animation-delay: 0.8s;
+        }
+
+        .tab-btn:nth-child(2) {
+            animation-delay: 1.0s;
+        }
+
+        .tab-btn:nth-child(3) {
+            animation-delay: 1.2s;
+        }
+
+        @keyframes slideInUpTab {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tab-btn:hover:not(.active) {
+            background-color: #f0f0f0;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .tab-content p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .info-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .info-item h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        /* Trust Section */
+        .trust-section {
+            padding: 100px 0;
+            background-color: white;
+            animation: slideInLeft 1s ease-out 0.5s both;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .trust-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .trust-image {
+            flex: 1;
+        }
+        
+        .trust-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .trust-text {
+            flex: 1;
+        }
+        
+        .trust-text h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .trust-features {
+            margin-top: 30px;
+        }
+        
+        .trust-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .trust-feature i {
+            color: var(--primary);
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            text-align: center;
+            color: white;
+            animation: slideInUp 1s ease-out 0.7s both;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .cta-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-btn {
+            background-color: white;
+            color: var(--primary);
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 50px;
+            display: inline-block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 80px 0 30px;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column {
+            animation: slideInUpFooter 1s ease-out both;
+        }
+
+        .footer-column:nth-child(1) {
+            animation-delay: 0.9s;
+        }
+
+        .footer-column:nth-child(2) {
+            animation-delay: 1.1s;
+        }
+
+        .footer-column:nth-child(3) {
+            animation-delay: 1.3s;
+        }
+
+        @keyframes slideInUpFooter {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer-column h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info i {
+            color: var(--primary);
+            margin-right: 15px;
+            font-size: 20px;
+            width: 24px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .trust-content {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .section-header h2 {
+                font-size: 32px;
+            }
+            
+            .tab-content {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 140px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .highlight-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="logo-text">DEALS <span>KARENGE</span></div>
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#video">Our Video</a></li>
+                    <li><a href="#buy-sell">Buy/Sell</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <div class="mobile-toggle" id="mobileToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Video Section -->
+    <section class="video-section" id="video" style="padding: 120px 0 80px;">
+        <div class="container">
+            <div class="section-header" style="margin-bottom: 40px;">
+                <h2>Welcome To Deals Karenge</h2>
+                <p>See how our secure YouTube channel buying and selling process works</p>
+            </div>
+            <% if (videoData.currentVideo) { %>
+            <video autoplay loop controls style="width: 100%; max-width: 600px; border-radius: 12px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); display: block; margin: 0 auto;">
+                <source src="<%= videoData.currentVideo.path %>" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <% } %>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Buy & Sell <span>YouTube Channels</span> Safely & Securely</h1>
+                    <p>DEALS KARENGE is a trusted marketplace for buying and selling YouTube channels. With over 5+ years of experience and 200+ successful deals, we provide a safe, transparent platform for creators and investors.</p>
+
+                    <div class="highlight-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Successful Deals</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Secure Process</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Buy/Sell Options -->
+    <section class="options" id="buy-sell">
+        <div class="container">
+            <div class="section-header">
+                <h2>Buy or Sell Your Channel</h2>
+            </div>
+
+            <div class="options-grid">
+                <div class="option-card">
+                    <div class="option-header">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Buy a Channel</h3>
+                    </div>
+                    <div class="option-body">
+                        <a href="https://wa.me/9235872627?text=I'm%20interested%20in%20browsing%20available%20YouTube%20channels" class="btn btn-primary" target="_blank">Browse Available Channels</a>
+                    </div>
+                </div>
+
+                <div class="option-card">
+                    <div class="option-header" style="background-color: var(--secondary);">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3>Sell Your Channel</h3>
+                    </div>
+                    <div class="option-body">
+                        <a href="https://wa.me/9235872627?text=I'm%20interested%20in%20selling%20my%20YouTube%20channel" class="btn btn-secondary" target="_blank">Start Selling Process</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Information Sections -->
+    <section class="info-sections" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Our Services</h2>
+            </div>
+            <div class="about-content" style="max-width: 800px; margin: 0 auto; padding: 40px 20px; text-align: center;">
+                <p style="font-size: 18px; color: var(--gray); margin-bottom: 20px;">Welcome to <strong style="color: var(--dark);">DEALS KARENGE</strong>, a trusted marketplace for buying and selling YouTube channels.</p>
+                <p style="font-size: 16px; color: var(--gray); margin-bottom: 40px;">With over 5+ years of hands-on experience in the social media industry, we have successfully completed 200+ YouTube channel deals across multiple niches and categories. Our journey has been built on real work, real results, and long-term relationships.</p>
+
+                <h3 style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 20px;">How to Sell Your YouTube Channel</h3>
+                <p style="font-size: 16px; color: var(--gray); margin-bottom: 20px;">Send the following details on WhatsApp to start the selling process:</p>
+                <ol style="text-align: left; display: inline-block; margin-bottom: 20px;">
+                    <li style="margin-bottom: 10px;">YouTube Channel Link</li>
+                    <li style="margin-bottom: 10px;">YouTube Studio Dashboard Screenshot</li>
+                    <li style="margin-bottom: 10px;">YouTube Analytics Screenshot</li>
+                    <li style="margin-bottom: 10px;">Monetization Section Screenshot</li>
+                </ol>
+                <p style="font-size: 16px; color: var(--gray); margin-bottom: 40px;">After reviewing the details, pricing and next steps will be discussed on WhatsApp.</p>
+
+                <h3 style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 20px;">Experience You Can Trust</h3>
+                <p style="font-size: 16px; color: var(--gray); margin-bottom: 20px;">The YouTube buying and selling space is full of risks, misinformation, and fraud. That's exactly why this platform was created — to provide a safe, transparent, and reliable solution for both buyers and sellers.</p>
+                <p style="font-size: 16px; color: var(--gray);">Every channel listed on our platform goes through a manual verification process to ensure authenticity, ownership, and genuine performance. We do not allow fake, misleading, or manipulated channels.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact" style="padding: 100px 0; background-color: white;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 900; color: var(--dark); margin-bottom: 15px;">Contact Us</h2>
+                <p style="color: var(--gray); max-width: 700px; margin: 0 auto;">Get in touch with us for any questions about buying or selling YouTube channels</p>
+            </div>
+
+            <div class="contact-content" style="max-width: 600px; margin: 0 auto; text-align: center;">
+                <div class="contact-item" style="margin-bottom: 30px;">
+                    <i class="fas fa-phone" style="font-size: 48px; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 24px; font-weight: 700; color: var(--dark); margin-bottom: 10px;">Phone Number</h3>
+                    <p style="font-size: 18px; color: var(--gray); margin-bottom: 10px;">+91 9235872627</p>
+                    <a href="https://wa.me/9235872627" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: var(--transition);">Contact on WhatsApp</a>
+                </div>
+
+                <div class="contact-item" style="margin-bottom: 30px;">
+                    <i class="fas fa-envelope" style="font-size: 48px; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 24px; font-weight: 700; color: var(--dark); margin-bottom: 10px;">Email Address</h3>
+                    <p style="font-size: 18px; color: var(--gray); margin-bottom: 10px;">business.dealskarenge@gmail.com</p>
+                    <a href="mailto:business.dealskarenge@gmail.com" style="display: inline-block; padding: 12px 24px; background-color: var(--secondary); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: var(--transition);">Send Email</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('video');
+            if (video) {
+                video.play().catch(function(error) {
+                    console.log('Autoplay was prevented:', error);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

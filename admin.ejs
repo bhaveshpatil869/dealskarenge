@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - DEALS KARENGE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .header:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .header h1 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .btn {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .upload-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
+        }
+
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .form-group input[type="file"] {
+            padding: 15px;
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .form-group input[type="file"]:hover {
+            border-color: #667eea;
+            background: rgba(102,126,234,0.05);
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.6);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,107,107,0.6);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(81,207,102,0.4);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(81,207,102,0.6);
+        }
+
+        .current-video, .video-list {
+            background: rgba(255,255,255,0.95);
+        }
+
+        .video-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .video-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .video-info {
+            flex: 1;
+        }
+
+        .video-info h3 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .video-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .video-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .alert-success {
+            background: rgba(212,237,218,0.9);
+            color: #155724;
+            border-color: rgba(195,230,203,0.5);
+        }
+
+        .alert-error {
+            background: rgba(248,215,218,0.9);
+            color: #721c24;
+            border-color: rgba(245,198,203,0.5);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: #667eea;
+        }
+
+        .stat-card p {
+            color: #666;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .video-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .video-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cog"></i> Admin Panel - DEALS KARENGE</h1>
+            <p>Manage demo videos for the website</p>
+            <p style="font-size: 1rem; margin: 10px 0;"><i class="fas fa-envelope"></i> Contact: <a href="mailto:business.dealskarenge@gmail.com" style="color: white; text-decoration: underline;">business.dealskarenge@gmail.com</a></p>
+            <a href="/" class="btn btn-primary" style="margin-top: 10px;"><i class="fas fa-home"></i> Back to Website</a>
+        </div>
+
+        <div id="message"></div>
+
+        <div class="card upload-section">
+            <h2><i class="fas fa-upload"></i> Upload New Video</h2>
+            <form id="uploadForm" class="upload-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="video">Select Video File (MP4, AVI, MOV, etc.)</label>
+                    <input type="file" id="video" name="video" accept="video/*" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-upload"></i> Upload Video
+                </button>
+            </form>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Uploading video... This may take a few minutes for large files.</p>
+            </div>
+        </div>
+
+        <% if (videoData.currentVideo) { %>
+        <div class="card current-video">
+            <h2><i class="fas fa-play-circle"></i> Current Demo Video</h2>
+            <div class="video-item">
+                <div class="video-info">
+                    <h3><%= videoData.currentVideo.originalName %></h3>
+                    <p>Uploaded: <%= new Date(videoData.currentVideo.uploadDate).toLocaleDateString() %> | Size: <%= (videoData.currentVideo.size / (1024 * 1024)).toFixed(2) %> MB</p>
+                </div>
+                <div class="video-actions">
+                    <button class="btn btn-success" disabled><i class="fas fa-check"></i> Current Video</button>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+        <div class="card video-list">
+            <h2><i class="fas fa-list"></i> Uploaded Videos (<%= videoData.uploadedVideos.length %>)</h2>
+            <% if (videoData.uploadedVideos.length === 0) { %>
+                <p>No videos uploaded yet.</p>
+            <% } else { %>
+                <% videoData.uploadedVideos.forEach(video => { %>
+                <div class="video-item">
+                    <div class="video-info">
+                        <h3><%= video.originalName %></h3>
+                        <p>Uploaded: <%= new Date(video.uploadDate).toLocaleDateString() %> | Size: <%= (video.size / (1024 * 1024)).toFixed(2) %> MB</p>
+                    </div>
+                    <div class="video-actions">
+                        <% if (!videoData.currentVideo || videoData.currentVideo.id !== video.id) { %>
+                        <button class="btn btn-success set-current-btn" data-video-id="<%= video.id %>">
+                            <i class="fas fa-play"></i> Set as Current
+                        </button>
+                        <% } %>
+                        <button class="btn btn-danger delete-btn" data-video-id="<%= video.id %>">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+                <% }); %>
+            <% } %>
+        </div>
+    </div>
+
+    <script>
+        const uploadForm = document.getElementById('uploadForm');
+        const loading = document.getElementById('loading');
+        const messageDiv = document.getElementById('message');
+
+        // Upload form submission
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(uploadForm);
+            loading.style.display = 'block';
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showMessage('Video uploaded successfully! Refreshing page...', 'success');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                } else {
+                    showMessage('Upload failed: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showMessage('Upload failed: ' + error.message, 'error');
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+
+        // Set current video
+        document.querySelectorAll('.set-current-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const videoId = e.target.closest('.set-current-btn').dataset.videoId;
+
+                try {
+                    const response = await fetch(`/set-current-video/${videoId}`, {
+                        method: 'POST'
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        showMessage('Current video updated successfully!', 'success');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        showMessage('Failed to update current video: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    showMessage('Failed to update current video: ' + error.message, 'error');
+                }
+            });
+        });
+
+        // Delete video
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                if (!confirm('Are you sure you want to delete this video?')) return;
+
+                const videoId = e.target.closest('.delete-btn').dataset.videoId;
+
+                try {
+                    const response = await fetch(`/delete-video/${videoId}`, {
+                        method: 'DELETE'
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        showMessage('Video deleted successfully!', 'success');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        showMessage('Failed to delete video: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    showMessage('Failed to delete video: ' + error.message, 'error');
+                }
+            });
+        });
+
+        function showMessage(message, type) {
+            messageDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            messageDiv.style.display = 'block';
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
